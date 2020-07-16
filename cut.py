@@ -6,17 +6,12 @@ from vsatcloud.scene import ProcessingScene
 
 class CutProcess(ProcessingScene):
     def __init__(self, params):
-        if params['geometry_json'] is None or params['geometry_json'] == "":
-            self.geometry_json = None
+        if params['geometry'] is None or params['geometry'] == "":
+            self.geometry = None
         else:
-            self.geometry_json = params['geometry_json']
+            self.geometry = params['geometry']
 
     def process(self, input_file_path):
-        """
-        :param self:
-        :param input_file_path: 待裁剪raster路径
-        :return: 输出文件的绝对路径
-        """
         geometry_path = self.write_geometry()
         output_path = os.path.join(os.getcwd(), "cut_target.tif")
         args = [
@@ -34,7 +29,7 @@ class CutProcess(ProcessingScene):
 
     def write_geometry(self):
         with open("vector.json", 'w+') as geom:
-            geom.write(json.dumps(self.geometry_json))
+            geom.write(json.dumps(self.geometry))
         return os.path.join(os.getcwd(), "vector.json")
 
 

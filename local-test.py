@@ -1,6 +1,6 @@
 import os
 
-from cut import CutProcess
+from run import CutProcess
 
 if __name__ == "__main__":
     params = {
